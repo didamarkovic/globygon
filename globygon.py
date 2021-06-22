@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 class Catalog:
     def __init__(self, RA, Dec):
@@ -44,9 +43,16 @@ class Catalog:
         return self.center_of_mass
 
 if __name__ == "__main__":
-    filename = "hardsurvey.txt"
-    data = pd.read_csv(filename, comment='#', names=['ID', 'RA', 'DEC'], delimiter=' ')
+    import pandas as pd
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", type=str, help="File name containing three columns with the last two containing RA/Dec values")
+    args = parser.parse_args()
+
+    filename = args.file
+    data = pd.read_csv(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
     degtorad = np.pi/180.
 
-    our_catalog = Catalog(data['RA']*degtorad, data['DEC']*degtorad)
+    our_catalog = Catalog(data['RA']*degtorad, data['Dec']*degtorad)
     print(our_catalog.calculate_center_of_mass())
