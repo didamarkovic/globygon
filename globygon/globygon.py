@@ -20,8 +20,7 @@ class Catalog:
         return x, y, z
 
     def _convert_Cartesian_to_RADec(self, x, y, z):
-        """
-        Converts Cartesian x, y, and z coordinates into right ascension (RA) and
+        """Converts Cartesian x, y, and z coordinates into right ascension (RA) and
         declination (Dec) as measured in radians
 
         The x-axis runs along a line of zero degrees Dec and RA, the y-axis
@@ -34,7 +33,6 @@ class Catalog:
         Returns:
             list: the RA and Dec corresponding to the given x, y, and z
             coordinates
-
         """
     
         # Normalize back to unit sphere
@@ -51,8 +49,7 @@ class Catalog:
         return RA, Dec
 
     def calculate_center_of_mass(self):
-        """
-        With a Catalog class instantiated and a list of RA/Dec values
+        """With a Catalog class instantiated and a list of RA/Dec values
         initialized, this method returns the RA/Dec of the center-of-mass for
         the RA/Dec points
 
@@ -61,7 +58,6 @@ class Catalog:
 
         Returns: 
             list: RA/Dec of center-of-mass in radians
-
         """
         x, y, z = self._convert_RADec_to_Cartesian()
 
