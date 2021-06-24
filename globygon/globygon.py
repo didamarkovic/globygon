@@ -43,7 +43,7 @@ class Catalog:
         elif(isinstance(x, float)):
             if((x == 0.) & (y == 0.) & (z == 0.)):
                 raise(ValueError("Cartesian coordinates are all zero!"))
-    
+        
         # Normalize back to unit sphere
         R = np.sqrt(x**2 + y**2 + z**2)
         

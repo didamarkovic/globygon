@@ -18,6 +18,28 @@ def test_Catalog_init():
     
     assert hasattr(cat, 'RA')
     assert hasattr(cat, 'Dec')
+
+def test_convert_RADec_to_Cartesian():
+    """
+    Testing the method that converts RA/Dec coordinates to Cartesian.
+    """
+
+    # Is r = 1?
+    RA = np.pi*np.arange(0,100,1.)/50
+    Dec = np.pi**np.arange(-50,50,1.)/100
+    ct = gb.Catalog(RA,Dec)
+    x,y,z = ct._convert_RADec_to_Cartesian()
+    R = np.sqrt(x**2 + y**2 + z**2)
+
+    assert np.all(np.isclose(R,1.))
+
+    # Check equations setting RA=0 to simplify
+    RA = np.array([0])
+    Dec = np.array([np.pi/4, 0.2, 0.0]) # a bunch of arbitrary values
+    ct = gb.Catalog(RA,Dec)
+    x,y,z = ct._convert_RADec_to_Cartesian()
+    assert np.all(np.isclose(x,np.cos(Dec)) & np.isclose(y,0.) & np.isclose(z,np.sin(Dec)))
+   
     
 def test__convert_Cartesian_to_RADec():
     """
@@ -64,3 +86,4 @@ if __name__ == '__main__':
     test_Catalog_init()
     test_calculate_center_of_mass()
     test__convert_Cartesian_to_RADec()
+    test_convert_RADec_to_Cartesian()
