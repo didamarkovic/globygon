@@ -1,5 +1,8 @@
 .ipynb_checkpoints/
 *.egg-info/
+docs/_build/
+*.pyc
+*.swp
 *.pyc
 build/
 dist/
