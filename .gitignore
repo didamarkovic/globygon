@@ -2,4 +2,7 @@
 *.egg-info/
 docs/_build/
 *.pyc
-.gitignore.swp
+*.swp
+*.pyc
+build/
+dist/
