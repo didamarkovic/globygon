@@ -36,9 +36,13 @@ class Catalog:
         """
 
         # Check that there are not any points with (x, y, z) = (0, 0, 0)
-        ind = np.argwhere((x == 0.) & (y == 0.) & (z == 0.))
-        if(len(x[ind]) > 0):
-            raise(ValueError("Cartesian coordinates are all zero!"))
+        if(isinstance(x, np.ndarray)):
+            ind = np.argwhere((x == 0.) & (y == 0.) & (z == 0.))
+            if(len(x[ind]) > 0):
+                raise(ValueError("Cartesian coordinates are all zero!"))
+        elif(isinstance(x, float)):
+            if((x == 0.) & (y == 0.) & (z == 0.)):
+                raise(ValueError("Cartesian coordinates are all zero!"))
     
         # Normalize back to unit sphere
         R = np.sqrt(x**2 + y**2 + z**2)
