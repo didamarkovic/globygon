@@ -1,6 +1,17 @@
 import numpy as np
+""" 
+Brian Jackson & Dida Markovic, 2021
+"""
 
 class Catalog:
+    """Catalog class containing the astronomical coordinates for a set of points on the sky.
+    
+    Args:
+        RA: the right ascension in radians as an array or float 
+        Dec: the declination in radians as an array or float
+    """
+
+
     def __init__(self, RA, Dec):
         
         self.RA = RA
@@ -9,9 +20,22 @@ class Catalog:
         self.center_of_mass = None
 
     def _convert_RADec_to_Cartesian(self):
-        '''
-        RA/Dec should be in radians
-        '''
+        """(Private) Converts right ascension (RA) and declination (Dec) into Cartesian 
+        coordinates (x,y,z) assuming a radius = 1.
+        
+        The x-axis runs along a line of zero degrees Dec and RA, the y-axis
+        along zero degrees Dec and 90 degrees RA, and the z-axis along 90
+        degrees Dec.
+
+        Args:
+            None
+
+        Returns:
+            x: Cartesian x coordinate
+            y: Cartesian y coordinate
+            z: Cartesian z coordinate
+        
+        """
     
         x = np.cos(self.Dec)*np.cos(self.RA)
         y = np.cos(self.Dec)*np.sin(self.RA)
@@ -20,7 +44,7 @@ class Catalog:
         return x, y, z
 
     def _convert_Cartesian_to_RADec(self, x, y, z):
-        """Converts Cartesian x, y, and z coordinates into right ascension (RA) and
+        """(Private) Converts Cartesian x, y, and z coordinates into right ascension (RA) and
         declination (Dec) as measured in radians
 
         The x-axis runs along a line of zero degrees Dec and RA, the y-axis
