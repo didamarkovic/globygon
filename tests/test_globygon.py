@@ -56,7 +56,9 @@ def test__convert_Cartesian_to_RADec():
         ct._convert_Cartesian_to_RADec(x, y, z)
     except:
         pass
-
+    else:
+        assert False, 'Point at origin should not work when converting to spherical'
+    
     # Points at the poles
     x = np.array([1., 0., 0.])
     y = np.array([0., 1., 0.])
