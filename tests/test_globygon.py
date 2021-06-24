@@ -6,13 +6,15 @@ from globygon import globygon as gb
 import matplotlib.pyplot as plt
 
 def test_Catalog_init():
-    # unit test for catalogue
+    """
+    Unit test for catalogue
+    """
     
     n = 20
     test_RA = np.arange(0,np.pi*2,n)
     test_Dec = np.arange(0,np.pi,n)-np.pi/2
     
-    cat = Catalog(test_RA,test_Dec)
+    cat = gb.Catalog(test_RA,test_Dec)
     
     assert hasattr(cat, 'RA')
     assert hasattr(cat, 'Dec')
@@ -43,7 +45,7 @@ def test__convert_Cartesian_to_RADec():
 
 def test_calculate_center_of_mass():
     """
-    Testing that the center-of-mass calculation actually works
+    Testing that the center-of-mass calculation actually works (e2e test)
     """
     
     # Symmetric RA/Decs should give center-of-mass for points as (0, 0)
