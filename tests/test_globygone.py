@@ -2,7 +2,7 @@
 Test the functionality of globygon
 """
 import numpy as np
-from globygon import globygon as gb
+from globygon import globygone as gb
 import matplotlib.pyplot as plt
 
 def test_Catalog_init():
