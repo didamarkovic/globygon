@@ -70,8 +70,10 @@ class Catalog:
         """
         x, y, z = self._convert_RADec_to_Cartesian()
 
+        # Calculate Cartesian center of mass
         mean_x, mean_y, mean_z = x.mean(), y.mean(), z.mean()
 
+        # Convert to RA&Dec and project to sphere (simply by setting r=1)
         self.center_of_mass = self._convert_Cartesian_to_RADec(mean_x, mean_y, mean_z)
         return self.center_of_mass
 
@@ -83,7 +85,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     filename = args.file
-    data = np.readfromtxt(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
+    data = np.genfromtxt(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
     degtorad = np.pi/180.
 
     our_catalog = Catalog(data['RA']*degtorad, data['Dec']*degtorad)
