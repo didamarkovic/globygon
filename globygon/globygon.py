@@ -76,7 +76,6 @@ class Catalog:
         return self.center_of_mass
 
 if __name__ == "__main__":
-    import pandas as pd
     import argparse
 
     parser = argparse.ArgumentParser()
@@ -84,7 +83,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     filename = args.file
-    data = pd.read_csv(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
+    data = np.readfromtxt(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
     degtorad = np.pi/180.
 
     our_catalog = Catalog(data['RA']*degtorad, data['Dec']*degtorad)
