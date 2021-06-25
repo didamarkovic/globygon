@@ -1,6 +1,18 @@
 import numpy as np
 
 class Catalog:
+    """
+    A class to contain points in right ascension and declination (RA/Dec) and
+    providing the functionality to calculate the center-of-mass of those points
+    in RA/Dec
+
+    Args:
+        RA/Dec pair of floats/numpy arrays: the RA/Dec of the points whose
+        center-of-mass is desired; should be in radians!
+
+    Written by Dida Markovic and Brian Jackson (bjackson@boisestate.edu) in
+    2021 as part of the Code/Astro Workshop
+    """
     def __init__(self, RA, Dec):
         
         self.RA = RA
@@ -9,9 +21,10 @@ class Catalog:
         self.center_of_mass = None
 
     def _convert_RADec_to_Cartesian(self):
-        '''
-        RA/Dec should be in radians
-        '''
+        """
+        Convert RA/Dec points to x/y/z Cartesian points to more easily
+        calculate the center-of-mass
+        """
     
         x = np.cos(self.Dec)*np.cos(self.RA)
         y = np.cos(self.Dec)*np.sin(self.RA)
@@ -20,7 +33,8 @@ class Catalog:
         return x, y, z
 
     def _convert_Cartesian_to_RADec(self, x, y, z):
-        """Converts Cartesian x, y, and z coordinates into right ascension (RA) and
+        """
+        Converts Cartesian x, y, and z coordinates into right ascension (RA) and
         declination (Dec) as measured in radians
 
         The x-axis runs along a line of zero degrees Dec and RA, the y-axis
@@ -58,7 +72,8 @@ class Catalog:
         return RA, Dec
 
     def calculate_center_of_mass(self):
-        """With a Catalog class instantiated and a list of RA/Dec values
+        """
+        With a Catalog class instantiated and a list of RA/Dec values
         initialized, this method returns the RA/Dec of the center-of-mass for
         the RA/Dec points
 
