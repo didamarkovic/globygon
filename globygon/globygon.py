@@ -100,7 +100,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     filename = args.file
-    data = np.genfromtxt(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
+    data = np.genfromtxt(filename, comments='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
     degtorad = np.pi/180.
 
     our_catalog = Catalog(data['RA']*degtorad, data['Dec']*degtorad)
