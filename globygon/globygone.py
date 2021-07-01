@@ -4,13 +4,18 @@ Brian Jackson & Dida Markovic, 2021
 """
 
 class Catalog:
-    """Catalog class containing the astronomical coordinates for a set of points on the sky.
-    
+    """
+    A class to contain points in right ascension and declination (RA/Dec) and
+    providing the functionality to calculate the center-of-mass of those points
+    in RA/Dec
+
     Args:
         RA: the right ascension in radians as an array or float 
         Dec: the declination in radians as an array or float
-    """
 
+    Written by Dida Markovic and Brian Jackson (bjackson@boisestate.edu) in
+    2021 as part of the Code/Astro Workshop
+    """
 
     def __init__(self, RA, Dec):
         
@@ -82,7 +87,8 @@ class Catalog:
         return RA, Dec
 
     def calculate_center_of_mass(self):
-        """With a Catalog class instantiated and a list of RA/Dec values
+        """
+        With a Catalog class instantiated and a list of RA/Dec values
         initialized, this method returns the RA/Dec of the center-of-mass for
         the RA/Dec points
 
@@ -94,8 +100,10 @@ class Catalog:
         """
         x, y, z = self._convert_RADec_to_Cartesian()
 
+        # Calculate Cartesian center of mass
         mean_x, mean_y, mean_z = x.mean(), y.mean(), z.mean()
 
+        # Convert to RA&Dec and project to sphere (simply by setting r=1)
         self.center_of_mass = self._convert_Cartesian_to_RADec(mean_x, mean_y, mean_z)
         return self.center_of_mass
 
@@ -107,7 +115,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     filename = args.file
-    data = np.readfromtxt(filename, comment='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
+    data = np.genfromtxt(filename, comments='#', names=['ID', 'RA', 'Dec'], delimiter=' ')
     degtorad = np.pi/180.
 
     our_catalog = Catalog(data['RA']*degtorad, data['Dec']*degtorad)
