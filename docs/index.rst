@@ -10,6 +10,8 @@ Welcome to Globygon's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   catalog
+
 
 
 Indices and tables
