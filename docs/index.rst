@@ -10,7 +10,7 @@ Welcome to Globygon's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   globygone
+   catalog
 
 
 
