@@ -1,4 +1,7 @@
 import numpy as np
+""" 
+Brian Jackson & Dida Markovic, 2021
+"""
 
 class Catalog:
     """
@@ -7,12 +10,13 @@ class Catalog:
     in RA/Dec
 
     Args:
-        RA/Dec pair of floats/numpy arrays: the RA/Dec of the points whose
-        center-of-mass is desired; should be in radians!
+        RA: the right ascension in radians as an array or float 
+        Dec: the declination in radians as an array or float
 
     Written by Dida Markovic and Brian Jackson (bjackson@boisestate.edu) in
     2021 as part of the Code/Astro Workshop
     """
+
     def __init__(self, RA, Dec):
         
         self.RA = RA
@@ -23,9 +27,21 @@ class Catalog:
         self.center_of_mass = None
 
     def _convert_RADec_to_Cartesian(self):
-        """
-        Convert RA/Dec points to x/y/z Cartesian points to more easily
-        calculate the center-of-mass
+        """(Private) Converts right ascension (RA) and declination (Dec) into Cartesian 
+        coordinates (x,y,z) assuming a radius = 1.
+        
+        The x-axis runs along a line of zero degrees Dec and RA, the y-axis
+        along zero degrees Dec and 90 degrees RA, and the z-axis along 90
+        degrees Dec.
+
+        Args:
+            None
+
+        Returns:
+            x: Cartesian x coordinate
+            y: Cartesian y coordinate
+            z: Cartesian z coordinate
+        
         """
     
         self.x = np.cos(self.Dec)*np.cos(self.RA)
@@ -35,8 +51,7 @@ class Catalog:
         return self.x, self.y, self.z
 
     def _convert_Cartesian_to_RADec(self, x, y, z):
-        """
-        Converts Cartesian x, y, and z coordinates into right ascension (RA) and
+        """(Private) Converts Cartesian x, y, and z coordinates into right ascension (RA) and
         declination (Dec) as measured in radians
 
         The x-axis runs along a line of zero degrees Dec and RA, the y-axis
